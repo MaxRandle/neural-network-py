@@ -14,23 +14,20 @@ alpha is the learning rate
 
 */
 
-//feedforward
-//a[0] is the input matrix, a[n] is the output matrix
+/// feedforward
 a[0] = x
 for n in  (0 -> number_of_layers) {
-    z = w[n] * a[n-1] + b[n]
-    a[n] = g(z)
+  z = w[n] * a[n-1] + b[n]
+  a[n] = g(z)
 }
 
-
-//backpropogation
-//we do not wish to adjust layer 0 as this is the input layer
+// backpropogation
 for n in (number_of_layers-1 -> 0) {
-    if n === number_of_layers-1 {
-        error[n] = y - a[n]
-    } else{
-        error[n] = w[n+1].T * error[n+1]
-    }
+  if n === number_of_layers-1 {
+    error[n] = y - a[n]
+  } else{
+    error[n] = w[n+1].T * error[n+1]
+  }
     gradient[n] = g'(a[n]) .* error[n] * alpha
     delta[n] = gradient[n] * a[n-1].T
     w[n] += delta[n]
